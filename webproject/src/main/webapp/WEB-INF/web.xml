@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	id="WebApp_ID" version="3.1">
+	<display-name>webproject</display-name>
+	<listener>
+		<listener-class>listener.DBCPListener</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>dbPropFile</param-name>
+		<param-value>D:/java/workspace/webproject/src/main/webapp/WEB-INF/db.properties</param-value>
+	</context-param>
+	
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
+		<servlet-name>commandController</servlet-name>
+		<servlet-class>mvc.ControllerWithURI</servlet-class>
+		<init-param>
+			<param-name>file</param-name>
+			<param-value>/WEB-INF/uri.properties</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>commandController</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	
+</web-app>
