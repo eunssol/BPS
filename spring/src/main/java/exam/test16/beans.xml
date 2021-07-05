@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+				http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	
+	<bean id="dateFormat" class="java.text.SimpleDateFormat">
+		<constructor-arg value="yyyy-MM-dd"/>
+	</bean>
+	
+	<bean id="dateEditor" class="org.springframework.beans.propertyeditors.CustomDateEditor">
+		<constructor-arg ref="dateFormat"/>
+		<constructor-arg value="true"/>
+	</bean>
+	<bean id="customPropertyEditorRegistar" class="exam.test16.CustomPropertyEditorRegistar">
+		<property name="customDateEditor" ref="dateEditor"></property>
+		</bean>
+		
+		<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="propertyEditorRegistrars">
+			<list>
+				<ref bean="customPropertyEditorRegistar"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="hankookTire" class="exam.test16.Tire">
+		<property name="maker" value="Hankook"/>
+		<property name="createdDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2014-5-5"> </constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="kumhoTire" class="exam.test16.Tire">
+		<property name="maker" value="Kumho"/>
+		<property name="createdDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2014-1-15"> </constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	
+	
+</beans>

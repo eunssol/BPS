@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+				http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	
+	
+	<bean id="engine1" class="exam.test07.Engine" c:maker="Hyundai" p:cc="1998" />
+		
+	<bean id="car1" class="exam.test07.Car"> 
+		<property name="model" ><value>Avante</value></property>
+		<property name="engine" ><ref bean="engine1"/></property>  <!--  ref = 객체(참조 자료형) value = int string ... etx) -->
+	</bean>
+	
+	<bean id="car2" class="exam.test07.Car"> 
+		<property name="model" value="Sonata"/>
+		<property name="engine" ref="engine1"/>
+	</bean>
+	
+	<bean id="car3" class="exam.test07.Car" p:model="Grandeur" p:engine-ref="engine1"/> 
+	<bean id="car4" class="exam.test07.Car" c:model="Equus" c:engine-ref="engine1"/> 
+	
+	
+</beans>
